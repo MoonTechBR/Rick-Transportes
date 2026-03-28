@@ -10,11 +10,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentSelectedService = "";
 
-    // --- NOVA FUNÇÃO: Busca de CEP Automática via API ViaCEP ---
+    // Busca de CEP Automática via API ViaCEP
     const buscarCEP = async (cepInputId, addressInputId) => {
         const cepInput = document.getElementById(cepInputId);
         const addressInput = document.getElementById(addressInputId);
-        let cep = cepInput.value.replace(/\D/g, ''); // Mantém apenas números
+        let cep = cepInput.value.replace(/\D/g, ''); 
 
         if (cep.length === 8) {
             try {
@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
                 
                 if (!data.erro) {
-                    // Preenche o campo de endereço de forma formatada
                     addressInput.value = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
                 } else {
                     Toastify({
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    // Dispara a busca automática ao atingir 8 números no campo CEP
     document.getElementById("cep-origin").addEventListener("input", (e) => {
         if(e.target.value.replace(/\D/g, '').length === 8) buscarCEP("cep-origin", "origin");
     });
@@ -45,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if(e.target.value.replace(/\D/g, '').length === 8) buscarCEP("cep-destination", "destination");
     });
 
-    // 1. Abrir modal ao clicar no serviço
+    // Abrir modal
     serviceCards.forEach(card => {
         card.addEventListener("click", (e) => {
             currentSelectedService = e.currentTarget.getAttribute("data-name");
@@ -55,13 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 2. Fechar modal (via botão ou clique no fundo escuro)
+    // Fechar modal
     closeModalBtn.addEventListener("click", () => quoteModal.classList.add("hidden"));
     quoteModal.addEventListener("click", (e) => {
         if (e.target === quoteModal) quoteModal.classList.add("hidden");
     });
 
-    // 3. Lógica Dinâmica dos Contadores de Itens
+    // Lógica dos Contadores
     const counterBtns = document.querySelectorAll(".counter-btn");
     counterBtns.forEach(btn => {
         btn.addEventListener("click", (e) => {
@@ -79,19 +77,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // 4. Estruturação e Envio da Mensagem para o WhatsApp
+    // Envio para o WhatsApp
     sendWhatsappBtn.addEventListener("click", () => {
         const origin = document.getElementById("origin").value.trim();
+        const numOrigin = document.getElementById("num-origin").value.trim();
         const destination = document.getElementById("destination").value.trim();
+        const numDestination = document.getElementById("num-destination").value.trim();
+        
         const accessType = document.getElementById("access-type").value;
         const helpers = document.getElementById("helpers").value;
         const assembly = document.getElementById("assembly").value;
         const extraItems = document.getElementById("extra-items").value.trim();
 
-        // Travas de Validação Essencial
         if (!origin || !destination) {
             Toastify({
-                text: "⚠️ Preencha a Retirada e a Entrega!",
+                text: "⚠️ Preencha a Rua/Bairro de Retirada e Entrega!",
                 duration: 3000,
                 close: true,
                 gravity: "top",
@@ -113,31 +113,41 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Mapeamento de todos os itens disponíveis e coleta dos que possuem quantidade > 0
+        // Mapeamento dos itens separados
         let inventoryText = "";
         const items = [
             { id: "item-geladeira", label: "Geladeira(s)" },
             { id: "item-fogao", label: "Fogão" },
             { id: "item-maquina", label: "Máquina de Lavar" },
             { id: "item-sofa", label: "Sofá(s)" },
-            { id: "item-moveis-sala", label: "Rack/Painel/Mesa" },
-            { id: "item-cama", label: "Cama(s)/Colchão" },
+            { id: "item-rack", label: "Rack(s)" },
+            { id: "item-painel", label: "Painel de TV" },
+            { id: "item-mesa", label: "Mesa(s)" },
+            { id: "item-cama", label: "Cama(s)" },
+            { id: "item-colchao", label: "Colchão" },
             { id: "item-armario", label: "Guarda-Roupa(s)" },
             { id: "item-caixas", label: "Caixas/Sacos (Aprox.)" }
         ];
 
         items.forEach(item => {
-            const count = parseInt(document.getElementById(item.id).textContent);
-            if (count > 0) {
-                inventoryText += `🔹 ${count}x ${item.label}\n`;
+            const countElement = document.getElementById(item.id);
+            if (countElement) {
+                const count = parseInt(countElement.textContent);
+                if (count > 0) {
+                    inventoryText += `🔹 ${count}x ${item.label}\n`;
+                }
             }
         });
 
-        // Montagem final do texto para o WhatsApp
+        // Formatação do Endereço com Número
+        const fullOrigin = numOrigin ? `${origin}, ${numOrigin}` : origin;
+        const fullDestination = numDestination ? `${destination}, ${numDestination}` : destination;
+
+        // Montagem final do texto
         let message = `*NOVO PEDIDO DE ORÇAMENTO* 🚚\n\n`;
         message += `*Serviço:* ${currentSelectedService}\n`;
-        message += `📍 *Retirada:* ${origin}\n`;
-        message += `🏁 *Entrega:* ${destination}\n`;
+        message += `📍 *Retirada:* ${fullOrigin}\n`;
+        message += `🏁 *Entrega:* ${fullDestination}\n`;
         message += `🏢 *Acesso/Imóvel:* ${accessType}\n\n`;
         
         message += `*SERVIÇOS EXTRAS:*\n`;
@@ -155,12 +165,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
 
-        // Abre o WhatsApp e fecha o modal
         window.open(whatsappUrl, "_blank");
         quoteModal.classList.add("hidden");
     });
 
-    // 5. Função Limpar Formulário (evita lixo residual de orçamentos anteriores)
+    // Limpar Formulário
     function resetForm() {
         document.querySelectorAll("input[type='text']").forEach(input => input.value = "");
         document.getElementById("access-type").value = "";
@@ -169,14 +178,13 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".item-count").forEach(span => span.textContent = "0");
     }
 
-    // 6. Atualização Visual de Status (Aberto/Fechado baseado no relógio)
+    // Badge de Horário
     const updateStatusBadge = () => {
         const badge = document.getElementById("status-badge");
         const statusText = document.getElementById("status-text");
         const now = new Date();
         const hour = now.getHours();
 
-        // Configurado para considerar aberto das 08h às 18h
         if (hour >= 8 && hour < 18) {
             badge.classList.add("bg-green-500", "shadow-[0_0_15px_rgba(34,197,94,0.5)]");
             badge.classList.remove("bg-red-500", "shadow-[0_0_15px_rgba(239,68,68,0.5)]");
