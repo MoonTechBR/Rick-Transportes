@@ -8,6 +8,21 @@
     <meta name="title" content="Rick Transportes | Carretos e Mudanças - (11) 96369-2499">
     <meta name="description" content="Solicite seu orçamento de frete ou mudança online. Atendimento ágil e seguro com Kia Bongo para toda a região.">
 
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moontechbr.github.io/Rick-Transportes/">
+    <meta property="og:title" content="🚚 Rick Transportes - Orçamento Online">
+    <meta property="og:description" content="Precisa de frete ou mudança? Escolha o serviço, informe origem/destino e receba o valor pelo WhatsApp!">
+    <meta property="og:image" content="https://i.ibb.co/pBXVVWn2/og-image.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://moontechbr.github.io/Rick-Transportes/">
+    <meta property="twitter:title" content="Rick Transportes | Carretos e Mudanças">
+    <meta property="twitter:description" content="Solicite seu orçamento de frete ou mudança direto pelo celular.">
+    <meta property="twitter:image" content="https://i.ibb.co/pBXVVWn2/og-image.png">
+
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -24,13 +39,6 @@
 
         .neon-glow {
             box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
-        }
-
-        /* Oculta as setas em inputs number caso decida usar em outro lugar */
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none; 
-            margin: 0; 
         }
     </style>
 </head>
@@ -105,17 +113,23 @@
             <div class="space-y-4">
                 <p class="font-bold border-l-4 border-rick-cyan pl-2 uppercase text-sm text-rick-navy">1. Logística e Trajeto</p>
                 
-                <div class="flex gap-2">
-                    <input type="text" id="cep-origin" placeholder="CEP (Opcional)" class="w-1/3 p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400 text-sm" maxlength="9"/>
-                    <input type="text" id="origin" placeholder="📍 Retirada (Rua/Bairro/Cidade)" class="w-2/3 p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400"/>
+                <div class="flex flex-col gap-2">
+                    <div class="flex gap-2">
+                        <input type="text" id="cep-origin" placeholder="CEP (Opcional)" class="w-1/3 p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400 text-sm" maxlength="9"/>
+                        <input type="text" id="origin" placeholder="📍 Retirada (Rua/Bairro/Cidade)" class="w-2/3 p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400"/>
+                    </div>
+                    <input type="text" id="num-origin" placeholder="Número / Complemento" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400"/>
                 </div>
 
-                <div class="flex gap-2">
-                    <input type="text" id="cep-destination" placeholder="CEP (Opcional)" class="w-1/3 p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400 text-sm" maxlength="9"/>
-                    <input type="text" id="destination" placeholder="🏁 Entrega (Rua/Bairro/Cidade)" class="w-2/3 p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400"/>
+                <div class="flex flex-col gap-2 mt-4">
+                    <div class="flex gap-2">
+                        <input type="text" id="cep-destination" placeholder="CEP (Opcional)" class="w-1/3 p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400 text-sm" maxlength="9"/>
+                        <input type="text" id="destination" placeholder="🏁 Entrega (Rua/Bairro/Cidade)" class="w-2/3 p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400"/>
+                    </div>
+                    <input type="text" id="num-destination" placeholder="Número / Complemento" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400"/>
                 </div>
                 
-                <select id="access-type" class="w-full p-3 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400 text-sm">
+                <select id="access-type" class="w-full p-3 mt-4 bg-gray-100 rounded-xl outline-none focus:ring-2 ring-cyan-400 text-sm">
                     <option value="" disabled selected>O local de retirada/entrega possui escadas?</option>
                     <option value="Casa Térrea / Sem escadas">Casa Térrea / Sem escadas</option>
                     <option value="Apartamento com Elevador">Apartamento (Com Elevador)</option>
@@ -173,16 +187,32 @@
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-bold text-gray-700">📺 Rack / Painel / Mesa</span>
+                        <span class="text-sm font-bold text-gray-700">📺 Rack</span>
                         <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-moveis-sala">-</button>
-                            <span class="w-4 text-center font-bold item-count" id="item-moveis-sala">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-moveis-sala">+</button>
+                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-rack">-</button>
+                            <span class="w-4 text-center font-bold item-count" id="item-rack">0</span>
+                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-rack">+</button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-gray-700">🖥️ Painel de TV</span>
+                        <div class="flex items-center gap-3">
+                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-painel">-</button>
+                            <span class="w-4 text-center font-bold item-count" id="item-painel">0</span>
+                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-painel">+</button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-gray-700">🪑 Mesa</span>
+                        <div class="flex items-center gap-3">
+                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-mesa">-</button>
+                            <span class="w-4 text-center font-bold item-count" id="item-mesa">0</span>
+                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-mesa">+</button>
                         </div>
                     </div>
 
                     <div class="flex justify-between items-center border-t pt-2">
-                        <span class="text-sm font-bold text-gray-700">🛏️ Cama / Colchão</span>
+                        <span class="text-sm font-bold text-gray-700">🛏️ Cama</span>
                         <div class="flex items-center gap-3">
                             <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-cama">-</button>
                             <span class="w-4 text-center font-bold item-count" id="item-cama">0</span>
@@ -190,37 +220,4 @@
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-bold text-gray-700">🚪 Guarda-Roupa</span>
-                        <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-armario">-</button>
-                            <span class="w-4 text-center font-bold item-count" id="item-armario">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-armario">+</button>
-                        </div>
-                    </div>
-
-                    <div class="flex justify-between items-center border-t pt-2">
-                        <span class="text-sm font-bold text-gray-700">📦 Caixas / Sacos (Aprox.)</span>
-                        <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-caixas">-</button>
-                            <span class="w-4 text-center font-bold item-count" id="item-caixas">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-caixas">+</button>
-                        </div>
-                    </div>
-                </div>
-
-                <input type="text" id="extra-items" placeholder="Faltou algo? (Ex: Bicicleta, Vidros)" class="w-full p-3 mt-2 bg-gray-50 rounded-xl border border-gray-200 text-sm focus:ring-2 ring-cyan-400"/>
-            </div>
-
-            <div class="flex gap-4 mt-8">
-                <button id="close-modal-btn" class="flex-1 py-3 font-bold text-gray-500 hover:bg-gray-100 rounded-xl transition">Voltar</button>
-                <button id="send-whatsapp-btn" class="flex-1 bg-green-600 text-white py-3 rounded-xl font-black shadow-lg shadow-green-200 uppercase hover:bg-green-700 transition flex justify-center items-center gap-2">
-                    <i class="fab fa-whatsapp text-xl"></i> Solicitar
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+                        <span class="text-sm font-bold text-gray-7
