@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // IMPORTANTE: Insira seu número real com código do país e DDD
+    // ATENÇÃO: Substitua pelo seu número (DDD + Número sem espaços)
     const WHATSAPP_NUMBER = "5511963692499"; 
 
     const serviceCards = document.querySelectorAll(".add-to-cart-btn");
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentSelectedService = "";
 
-    // Busca de CEP Automática via API ViaCEP
+    // Função de Busca de CEP via API ViaCEP
     const buscarCEP = async (cepInputId, addressInputId) => {
         const cepInput = document.getElementById(cepInputId);
         const addressInput = document.getElementById(addressInputId);
@@ -25,17 +25,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     addressInput.value = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
                 } else {
                     Toastify({
-                        text: "CEP não encontrado. Digite o endereço manualmente.",
+                        text: "CEP não encontrado. Digite manualmente.",
                         duration: 3000,
                         style: { background: "#ffcc00", color: "#000" }
                     }).showToast();
                 }
             } catch (error) {
-                console.error("Erro na busca do CEP:", error);
+                console.error("Erro na API ViaCEP:", error);
             }
         }
     };
 
+    // Disparadores automáticos ao digitar o CEP
     document.getElementById("cep-origin").addEventListener("input", (e) => {
         if(e.target.value.replace(/\D/g, '').length === 8) buscarCEP("cep-origin", "origin");
     });
@@ -43,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if(e.target.value.replace(/\D/g, '').length === 8) buscarCEP("cep-destination", "destination");
     });
 
-    // Abrir modal
+    // Abrir Modal
     serviceCards.forEach(card => {
         card.addEventListener("click", (e) => {
             currentSelectedService = e.currentTarget.getAttribute("data-name");
@@ -53,13 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Fechar modal
+    // Fechar Modal
     closeModalBtn.addEventListener("click", () => quoteModal.classList.add("hidden"));
     quoteModal.addEventListener("click", (e) => {
         if (e.target === quoteModal) quoteModal.classList.add("hidden");
     });
 
-    // Lógica dos Contadores
+    // Controle dos Contadores Dinâmicos
     const counterBtns = document.querySelectorAll(".counter-btn");
     counterBtns.forEach(btn => {
         btn.addEventListener("click", (e) => {
@@ -77,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Envio para o WhatsApp
+    // Montagem e Envio para WhatsApp
     sendWhatsappBtn.addEventListener("click", () => {
         const origin = document.getElementById("origin").value.trim();
         const numOrigin = document.getElementById("num-origin").value.trim();
@@ -89,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const assembly = document.getElementById("assembly").value;
         const extraItems = document.getElementById("extra-items").value.trim();
 
+        // Validação de segurança
         if (!origin || !destination) {
             Toastify({
                 text: "⚠️ Preencha a Rua/Bairro de Retirada e Entrega!",
@@ -113,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // Mapeamento dos itens separados
+        // Construção da lista de itens
         let inventoryText = "";
         const items = [
             { id: "item-geladeira", label: "Geladeira(s)" },
@@ -139,11 +141,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
-        // Formatação do Endereço com Número
-        const fullOrigin = numOrigin ? `${origin}, ${numOrigin}` : origin;
-        const fullDestination = numDestination ? `${destination}, ${numDestination}` : destination;
+        // Formatação do Endereço Completo
+        const fullOrigin = numOrigin ? `${origin}, N° ${numOrigin}` : origin;
+        const fullDestination = numDestination ? `${destination}, N° ${numDestination}` : destination;
 
-        // Montagem final do texto
+        // Estruturação Final da Mensagem
         let message = `*NOVO PEDIDO DE ORÇAMENTO* 🚚\n\n`;
         message += `*Serviço:* ${currentSelectedService}\n`;
         message += `📍 *Retirada:* ${fullOrigin}\n`;
@@ -169,7 +171,7 @@ document.addEventListener("DOMContentLoaded", () => {
         quoteModal.classList.add("hidden");
     });
 
-    // Limpar Formulário
+    // Limpeza de cache de formulário
     function resetForm() {
         document.querySelectorAll("input[type='text']").forEach(input => input.value = "");
         document.getElementById("access-type").value = "";
@@ -178,13 +180,14 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelectorAll(".item-count").forEach(span => span.textContent = "0");
     }
 
-    // Badge de Horário
+    // Identificador Visual de Expediente
     const updateStatusBadge = () => {
         const badge = document.getElementById("status-badge");
         const statusText = document.getElementById("status-text");
         const now = new Date();
         const hour = now.getHours();
 
+        // Expediente: 08:00 às 18:00
         if (hour >= 8 && hour < 18) {
             badge.classList.add("bg-green-500", "shadow-[0_0_15px_rgba(34,197,94,0.5)]");
             badge.classList.remove("bg-red-500", "shadow-[0_0_15px_rgba(239,68,68,0.5)]");
