@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Rick Transportes | Carretos e Mudanças - (11) 96369-2499</title>
-    <meta name="title" content="Rick Transportes | Carretos e Mudanças - (11) 96369-2499">
-    <meta name="description" content="Solicite seu orçamento de frete ou mudança online. Atendimento ágil e seguro com Kia Bongo para toda a região.">
+    <title>Rick Transportes | Carretos e Mudanças SP - (11) 96369-2499</title>
+    <meta name="title" content="Rick Transportes | Carretos e Mudanças SP - (11) 96369-2499">
+    <meta name="description" content="Solicite orçamento de carreto, frete ou mudança residencial. Atendimento rápido e seguro com caminhão baú para toda a região.">
+    <meta name="keywords" content="carreto, mudança, frete, transporte, carreto sp, caminhão baú, mudança residencial, frete barato">
+    <meta name="robots" content="index, follow">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://moontechbr.github.io/Rick-Transportes/">
     <meta property="og:title" content="🚚 Rick Transportes - Orçamento Online">
-    <meta property="og:description" content="Precisa de frete ou mudança? Escolha o serviço, informe origem/destino e receba o valor pelo WhatsApp!">
+    <meta property="og:description" content="Precisa de frete ou mudança? Escolha o serviço, informe origem/destino e receba o valor exato pelo WhatsApp!">
     <meta property="og:image" content="https://i.ibb.co/pBXVVWn2/og-image.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
@@ -23,6 +25,28 @@
     <meta property="twitter:description" content="Solicite seu orçamento de frete ou mudança direto pelo celular.">
     <meta property="twitter:image" content="https://i.ibb.co/pBXVVWn2/og-image.png">
 
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MovingCompany",
+      "name": "Rick Transportes",
+      "image": "https://i.ibb.co/pBXVVWn2/og-image.png",
+      "telephone": "+5511963692499",
+      "url": "https://moontechbr.github.io/Rick-Transportes/",
+      "description": "Serviço profissional de carretos, fretes e mudanças residenciais com segurança e agilidade.",
+      "areaServed": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": "-23.5505",
+          "longitude": "-46.6333"
+        },
+        "geoRadius": "50000"
+      },
+      "priceRange": "$$"
+    }
+    </script>
+
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -32,13 +56,13 @@
             --rick-navy: #0e1e35;
             --rick-cyan: #00d2ff;
         }
-
         .bg-rick-navy { background-color: var(--rick-navy); }
         .text-rick-cyan { color: var(--rick-cyan); }
         .border-rick-cyan { border-color: var(--rick-cyan); }
-
-        .neon-glow {
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+        .neon-glow { box-shadow: 0 0 15px rgba(0, 210, 255, 0.4); }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; margin: 0; 
         }
     </style>
 </head>
@@ -49,7 +73,7 @@
         
         <div class="absolute w-64 h-64 bg-cyan-500/20 blur-[120px] rounded-full"></div>
         
-        <img src="https://i.ibb.co/Z6PKrHtN/Logo-Rick2.png" alt="Rick Transportes" 
+        <img src="https://i.ibb.co/Z6PKrHtN/Logo-Rick2.png" alt="Logotipo Rick Transportes" 
              class="w-48 h-48 rounded-full border-4 border-rick-cyan shadow-[0_0_30px_rgba(0,210,255,0.4)] mb-6 z-10 bg-white object-contain"/>
         
         <h1 class="text-5xl font-black text-white uppercase tracking-tighter z-10 italic">
@@ -59,7 +83,7 @@
             Expresso e Mudanças
         </p>
 
-        <div class="mt-6 px-5 py-2 rounded-full transition-all z-10" id="status-badge">
+        <div class="mt-6 px-5 py-2 rounded-full transition-all z-10" id="status-badge" aria-live="polite">
             <span id="status-text" class="text-white font-bold uppercase text-sm tracking-widest">Verificando Horário...</span>
         </div>
     </header>
@@ -69,8 +93,8 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="menu">
             
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:scale-[1.02] duration-300 neon-glow cursor-pointer add-to-cart-btn" data-name="Carreto Expresso">
-                <img src="https://i.ibb.co/qMsqDVGn/Banner.jpg?auto=format&fit=crop&q=80&w=500" class="w-full md:w-40 h-40 object-cover"/>
+            <article class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:scale-[1.02] duration-300 neon-glow cursor-pointer add-to-cart-btn" data-name="Carreto Expresso">
+                <img src="https://i.ibb.co/qMsqDVGn/Banner.jpg?auto=format&fit=crop&q=80&w=500" alt="Caminhão para Carreto Expresso" class="w-full md:w-40 h-40 object-cover"/>
                 <div class="p-5 flex-1 flex flex-col justify-between pointer-events-none">
                     <div>
                         <h3 class="font-black text-xl mb-1 uppercase text-rick-navy">Carreto Expresso <span class="text-xs text-rick-cyan">Até 500kg</span></h3>
@@ -78,15 +102,15 @@
                     </div>
                     <div class="flex items-center justify-between mt-4">
                         <span class="font-bold text-xl text-green-600">A partir de R$ 120</span>
-                        <button class="bg-rick-navy text-white p-3 rounded-xl hover:bg-zinc-800 pointer-events-auto transition">
+                        <button class="bg-rick-navy text-white p-3 rounded-xl hover:bg-zinc-800 pointer-events-auto transition" aria-label="Solicitar Orçamento de Carreto">
                             <i class="fa fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
-            </div>
+            </article>
 
-            <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:scale-[1.02] duration-300 neon-glow cursor-pointer add-to-cart-btn" data-name="Mudança Residencial">
-                <img src="https://i.ibb.co/VpPxqNX4/Banner-2.png?auto=format&fit=crop&q=80&w=500" class="w-full md:w-40 h-40 object-cover"/>
+            <article class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col md:flex-row hover:scale-[1.02] duration-300 neon-glow cursor-pointer add-to-cart-btn" data-name="Mudança Residencial">
+                <img src="https://i.ibb.co/VpPxqNX4/Banner-2.png?auto=format&fit=crop&q=80&w=500" alt="Equipe realizando Mudança Residencial" class="w-full md:w-40 h-40 object-cover"/>
                 <div class="p-5 flex-1 flex flex-col justify-between pointer-events-none">
                     <div>
                         <h3 class="font-black text-xl mb-1 uppercase text-rick-navy">Mudança Residencial <span class="text-xs text-rick-cyan">Caminhão Baú</span></h3>
@@ -94,17 +118,17 @@
                     </div>
                     <div class="flex items-center justify-between mt-4">
                         <span class="font-bold text-xl text-green-600 italic">Sob Consulta</span>
-                        <button class="bg-rick-navy text-white p-3 rounded-xl hover:bg-zinc-800 pointer-events-auto transition">
+                        <button class="bg-rick-navy text-white p-3 rounded-xl hover:bg-zinc-800 pointer-events-auto transition" aria-label="Solicitar Orçamento de Mudança">
                             <i class="fa fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
-            </div>
+            </article>
 
         </div>
     </main>
 
-    <div class="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center hidden p-4" id="quote-modal">
+    <div class="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center hidden p-4" id="quote-modal" role="dialog" aria-modal="true">
         <div class="bg-white w-full max-w-lg rounded-3xl p-6 overflow-y-auto max-h-[90vh]">
             <h2 class="text-2xl font-black text-center mb-4 uppercase text-rick-navy italic">Detalhes do Orçamento</h2>
             
@@ -156,68 +180,109 @@
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-bold text-gray-700">🧊 Geladeira</span>
                         <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-geladeira">-</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-geladeira">-</button>
                             <span class="w-4 text-center font-bold item-count" id="item-geladeira">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-geladeira">+</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-geladeira">+</button>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-bold text-gray-700">🔥 Fogão</span>
                         <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-fogao">-</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-fogao">-</button>
                             <span class="w-4 text-center font-bold item-count" id="item-fogao">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-fogao">+</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-fogao">+</button>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-bold text-gray-700">🧺 Máquina de Lavar</span>
                         <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-maquina">-</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-maquina">-</button>
                             <span class="w-4 text-center font-bold item-count" id="item-maquina">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-maquina">+</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-maquina">+</button>
                         </div>
                     </div>
 
                     <div class="flex justify-between items-center border-t pt-2">
                         <span class="text-sm font-bold text-gray-700">🛋️ Sofá</span>
                         <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-sofa">-</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-sofa">-</button>
                             <span class="w-4 text-center font-bold item-count" id="item-sofa">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-sofa">+</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-sofa">+</button>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-bold text-gray-700">📺 Rack</span>
                         <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-rack">-</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-rack">-</button>
                             <span class="w-4 text-center font-bold item-count" id="item-rack">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-rack">+</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-rack">+</button>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-bold text-gray-700">🖥️ Painel de TV</span>
                         <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-painel">-</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-painel">-</button>
                             <span class="w-4 text-center font-bold item-count" id="item-painel">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-painel">+</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-painel">+</button>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-sm font-bold text-gray-700">🪑 Mesa</span>
                         <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-mesa">-</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-mesa">-</button>
                             <span class="w-4 text-center font-bold item-count" id="item-mesa">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-mesa">+</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-mesa">+</button>
                         </div>
                     </div>
 
                     <div class="flex justify-between items-center border-t pt-2">
                         <span class="text-sm font-bold text-gray-700">🛏️ Cama</span>
                         <div class="flex items-center gap-3">
-                            <button class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-cama">-</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-cama">-</button>
                             <span class="w-4 text-center font-bold item-count" id="item-cama">0</span>
-                            <button class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-cama">+</button>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-cama">+</button>
                         </div>
                     </div>
                     <div class="flex justify-between items-center">
-                        <span class="text-sm font-bold text-gray-7
+                        <span class="text-sm font-bold text-gray-700">🔲 Colchão (Avulso)</span>
+                        <div class="flex items-center gap-3">
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-colchao">-</button>
+                            <span class="w-4 text-center font-bold item-count" id="item-colchao">0</span>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-colchao">+</button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-gray-700">🚪 Guarda-Roupa</span>
+                        <div class="flex items-center gap-3">
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-armario">-</button>
+                            <span class="w-4 text-center font-bold item-count" id="item-armario">0</span>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-armario">+</button>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center border-t pt-2">
+                        <span class="text-sm font-bold text-gray-700">📦 Caixas / Sacos (Aprox.)</span>
+                        <div class="flex items-center gap-3">
+                            <button type="button" class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 font-bold hover:bg-red-200 transition counter-btn" data-action="minus" data-target="item-caixas">-</button>
+                            <span class="w-4 text-center font-bold item-count" id="item-caixas">0</span>
+                            <button type="button" class="w-8 h-8 rounded-full bg-rick-navy text-white font-bold hover:bg-rick-cyan transition counter-btn" data-action="plus" data-target="item-caixas">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="text" id="extra-items" placeholder="Faltou algo? (Ex: Bicicleta, Vidros)" class="w-full p-3 mt-2 bg-gray-50 rounded-xl border border-gray-200 text-sm focus:ring-2 ring-cyan-400"/>
+            </div>
+
+            <div class="flex gap-4 mt-8">
+                <button type="button" id="close-modal-btn" class="flex-1 py-3 font-bold text-gray-500 hover:bg-gray-100 rounded-xl transition">Voltar</button>
+                <button type="button" id="send-whatsapp-btn" class="flex-1 bg-green-600 text-white py-3 rounded-xl font-black shadow-lg shadow-green-200 uppercase hover:bg-green-700 transition flex justify-center items-center gap-2">
+                    <i class="fab fa-whatsapp text-xl"></i> Solicitar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
